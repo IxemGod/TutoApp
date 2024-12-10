@@ -1,5 +1,6 @@
 package com.example.tutoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -49,7 +50,11 @@ class MainActivity : AppCompatActivity() {
             val correctPassword = "azerty"
 
             if(correctMail.equals(emailContent) && correctPassword.equals(passwordContent)){
-                Toast.makeText(this, "Vous êtes connecté !", Toast.LENGTH_LONG).show()
+                email.setText("")
+                password.setText("")
+                var intentToHomeActivity : Intent = Intent(this, HomeActivity::class.java)
+                intentToHomeActivity.putExtra("email", emailContent)
+                startActivity(intentToHomeActivity)
             }
             else{
                 error.text  = "Mot de passe / Email invalide"
