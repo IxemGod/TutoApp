@@ -2,4 +2,11 @@
     <string name="app_name">Ixem App</string>
     <string name="homeactivity">Accueil</string>
     <string name="connexion">Connexion</string>
+    <string-array name="posts">
+        <item>Poste 1</item>
+        <item>Poste 2</item>
+        <item>Poste 3</item>
+        <item>Poste 4</item>
+        <item>Poste 5</item>
+    </string-array>
 </resources>

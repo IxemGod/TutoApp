@@ -1,6 +1,8 @@
 package com.example.tutoapp
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +20,14 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
-        val tvHello = findViewById<TextView>(R.id.tvHello)
-        val email = intent.getStringExtra("email")
+        val postsArray = arrayListOf("Post 1", "Post 2", "Post 3", "Post 4", "Post 5", "Post 6")
+        val listePost = findViewById<ListView>(R.id.listeposts)
+        val adapter = PostAdapter(this, R.layout.item_post, postsArray)
+        listePost.adapter = adapter
 
-        tvHello.text = "Bienvenu(e) : $email"
+        //val tvHello = findViewById<TextView>(R.id.tvHello)
+        //val email = intent.getStringExtra("email")
+
+        // tvHello.text = "Bienvenu(e) : $email"
     }
 }
