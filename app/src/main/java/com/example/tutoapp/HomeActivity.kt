@@ -1,16 +1,12 @@
 package com.example.tutoapp
-
+import androidx.appcompat.app.AppCompatDelegate
 import android.content.Intent
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.AdapterContextMenuInfo
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -88,30 +85,4 @@ class HomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?,
-        v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        menuInflater.inflate(R.menu.list_context_menu, menu)
-        super.onCreateContextMenu(menu, v, menuInfo)
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info: AdapterView.AdapterContextMenuInfo = item.menuInfo as AdapterContextMenuInfo
-        val position: Int = info.position
-        when(item.itemId){
-            R.id.itemShow -> {
-                Intent(this, PostDetailsActivity::class.java).also{
-                    it.putExtra("titre", postsArray[position].titre)
-                    startActivity(it)
-                }
-            }
-            R.id.itemDelete -> {
-                postsArray.removeAt(position)
-                adapter.notifyDataSetChanged()
-            }
-        }
-        return super.onContextItemSelected(item)
-    }
 }

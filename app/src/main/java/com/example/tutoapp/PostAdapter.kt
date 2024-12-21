@@ -1,11 +1,13 @@
 package com.example.tutoapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 
 class PostAdapter (
@@ -24,8 +26,34 @@ class PostAdapter (
         val tvDesc = itemView.findViewById<TextView>(R.id.description)
         tvDesc.text = post.description
 
+        val BtnShowPopup = itemView.findViewById<ImageView>(R.id.BtnShowPopUp)
+
         val tvImage = itemView.findViewById<ImageView>(R.id.avatar)
         tvImage.setImageResource(post.image)
+
+        BtnShowPopup.setOnClickListener{
+            val popupMenu = PopupMenu(mContext, it)
+            popupMenu.menuInflater.inflate(R.menu.list_popup_menu, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when(item.itemId){
+                    R.id.itemShow ->{
+                        Intent(mContext, PostDetailsActivity::class.java).also{
+                            it.putExtra("titre", post.titre)
+                            mContext.startActivity(it)
+                        }
+                    }
+                    R.id.itemDelete ->{
+                        values.removeAt(position)
+                        notifyDataSetChanged()
+                    }
+                }
+                true
+            }
+
+
+            popupMenu.show()
+        }
         return itemView
     }
 }
