@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var listePost: ListView
     var postsArray = ArrayList<Post>()
+    lateinit var adapter: PostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
             Post("Stockholm", "Bienvenu sur la facebook d'Ixem", R.drawable.logo)
         )
         val postsArrayBis = arrayListOf("Post 1", "Post 2", "Post 3", "Post 4", "Post 5", "Post 6")
-        val adapter = PostAdapter(this, R.layout.item_post, postsArray)
+        adapter = PostAdapter(this, R.layout.item_post, postsArray)
         listePost.adapter = adapter
 
         listePost.setOnItemClickListener{adapterView, view, position, id ->
@@ -101,10 +102,14 @@ class HomeActivity : AppCompatActivity() {
         val position: Int = info.position
         when(item.itemId){
             R.id.itemShow -> {
-                Toast.makeText(this, "show ${position}", Toast.LENGTH_SHORT).show()
+                Intent(this, PostDetailsActivity::class.java).also{
+                    it.putExtra("titre", postsArray[position].titre)
+                    startActivity(it)
+                }
             }
             R.id.itemDelete -> {
-                Toast.makeText(this, "delete ${position}", Toast.LENGTH_SHORT).show()
+                postsArray.removeAt(position)
+                adapter.notifyDataSetChanged()
             }
         }
         return super.onContextItemSelected(item)
