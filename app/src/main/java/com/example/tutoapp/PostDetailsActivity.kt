@@ -24,5 +24,7 @@ class PostDetailsActivity : AppCompatActivity() {
         val tvTitre = findViewById<TextView>(R.id.Titre)
         tvTitre.text = titre
 
+        supportActionBar!!.title = titre
+
     }
 }

@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                 error.visibility = View.VISIBLE
             }
             else {
-                Toast.makeText(this, "Votre email est : ${emailContent}", Toast.LENGTH_LONG).show()
-                Toast.makeText(this, "Votre password est : ${passwordContent}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Votre email est : ${emailContent}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Votre password est : ${passwordContent}", Toast.LENGTH_SHORT).show()
 
             }
 
