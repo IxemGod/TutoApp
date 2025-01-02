@@ -24,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Redirection page s'enregistrer
+        val register = findViewById<TextView>(R.id.redirecteRegister)
+
+        register.setOnClickListener(View.OnClickListener { view: View? ->
+            var intentToRegisterActivity : Intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intentToRegisterActivity)
+        })
+
         val connect = findViewById<Button>(R.id.connect)
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)

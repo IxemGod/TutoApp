@@ -3,6 +3,7 @@ package com.example.tutoapp.db;
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.tutoapp.data.User
 
 public class FaceBookDatabase(mContext: Context) : SQLiteOpenHelper(
     mContext,
@@ -28,6 +29,10 @@ public class FaceBookDatabase(mContext: Context) : SQLiteOpenHelper(
             // Supression des anciennes tables et la recrée de nouveau
             db?.execSQL("DROP TABLE IF EXISTS users")
             onCreate(db)
+        }
+
+        fun addUser(user: User) : Boolean{
+            return false
         }
 
         companion object{
