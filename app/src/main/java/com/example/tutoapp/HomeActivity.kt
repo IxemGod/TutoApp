@@ -1,4 +1,5 @@
 package com.example.tutoapp
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -79,10 +81,35 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this, "Paramêtre de l'appli",Toast.LENGTH_SHORT).show()
             }
             R.id.logout -> {
-                finish()
+                showLogoutConfirmDialog()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    fun showLogoutConfirmDialog(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmation !")
+        builder.setMessage("Ête vous sur de vouloir quitter ?")
+
+        builder.setPositiveButton("Oui") { dialogInterface, id ->
+            val editor = this.getSharedPreferences("app_state", Context.MODE_PRIVATE).edit()
+            // editor.putBoolean("is_authentificated", false)
+            // Ou alors :
+            editor.remove("is_authentificated")
+            editor.apply()
+            finish()
+        }
+
+        builder.setNegativeButton("Non") {dialogInterface, id ->
+            dialogInterface.dismiss()
+        }
+
+        builder.setNeutralButton("Annuler") {dialogInterface, id ->
+            dialogInterface.dismiss()
+        }
+        val alertDialog: AlertDialog = builder.create()
+
+        alertDialog.show()
+    }
 }
